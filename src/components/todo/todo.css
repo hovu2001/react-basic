@@ -1,0 +1,92 @@
+.todo-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: linear-gradient(to right, #a1c4fd, #c2e9fb);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding: 20px;
+}
+
+.todo-title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.todo-new {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.todo-new input {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  width: 250px;
+  font-size: 1rem;
+}
+
+.todo-new button {
+  padding: 10px 20px;
+  background-color: #00b894;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition:  0.3s;
+}
+
+.todo-new button:hover {
+  background-color: #019875;
+}
+
+.todo-data {
+  width: 100%;
+  max-width: 400px;
+}
+
+.todo-data div {
+  background-color: #fff;
+  padding: 12px 16px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+/* css img */
+.todo-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.todo-image img {
+  width: 120px; 
+  height: 120px;
+  object-fit: contain; 
+  animation: spin 8s linear infinite;
+  transition: transform 0.3s ease-in-out;
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2));
+  border-radius: 50%; 
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+/* end css img */
+
+
+.todo-item {
+  display: flex;
+  justify-content: space-between;
+}
