@@ -10,17 +10,16 @@ const UserPage = () => {
     loadUser();
   }, []);
 
- const loadUser = async () => {
-      const res = await fetchAllUserAPI()
-      setDataUsers(res.data)
-  }
-
-
+  const loadUser = async () => {
+    const res = await fetchAllUserAPI();
+    setDataUsers(res.data);
+  };
 
   return (
     <div style={{ padding: "20px" }}>
       <UserForm loadUser={loadUser} />
       <UserTable dataUsers={dataUsers} />
+    
     </div>
   );
 };

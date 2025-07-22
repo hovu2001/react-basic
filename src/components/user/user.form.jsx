@@ -25,7 +25,7 @@ const UserForm = (props) => {
     setIsModalOpen(false);
   };
 
-  const handelSubmitBtn = async () => {
+  const handleSubmitBtn = async () => {
  
     const res = await createUserAPI(fullName, email, password, phone);
     if (res.data) {
@@ -61,7 +61,7 @@ const UserForm = (props) => {
       <Modal
         title="Create User"
         open={isModalOpen}
-        onOk={() => handelSubmitBtn()}
+        onOk={() => handleSubmitBtn()}
         onCancel={() => resetAndCloseModal()}
         maskClosable={false}
         okText={"Create User"}

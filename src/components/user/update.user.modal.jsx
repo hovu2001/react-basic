@@ -1,64 +1,81 @@
 
 import { Button, Input, notification, Modal } from "antd";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { createUserAPI } from "../../services/api.service";
-const UpdateUserModal = () => {
+const UpdateUserModal = (props) => {
 
           const [fullName, setFullName] = useState("");
-          const [email, setEmail] = useState("");
-          const [password, setPassword] = useState("");
+          const [id, setId] = useState("");
           const [phone, setPhone] = useState("");
-          const [isModalOpen, setIsModalOpen] = useState(true);
+        
+          const {isModalUpdateOpen,setIsModalUpdateOpen, dataUpdate, setDataUpdate} = props;
+
+          useEffect(() => {
+              console.log("check data Update", dataUpdate);
+              if(dataUpdate){
+                setId(dataUpdate._id)
+                setFullName(dataUpdate.fullName)
+                setPhone(dataUpdate.phone)
+              }
+          }, [dataUpdate])
+
         
 
-          const showModal = () => {
-    setIsModalOpen(true);
+  const showModal = () => {
+    setIsModalUpdateOpen(true);
   };
   const handleOk = () => {
-    setIsModalOpen(false);
+    setIsModalUpdateOpen(false);
   };
   const handleCancel = () => {
-    setIsModalOpen(false);
+    setIsModalUpdateOpen(false);
   };
 
-  const handelSubmitBtn = async () => {
+//   const handleSubmitBtn = async () => {
  
-    const res = await createUserAPI(fullName, email, password, phone);
-    if (res.data) {
-      notification.success({
-        message: "create user",
-        description: "Tao user thanh cong",
-      });
-     resetAndCloseModal();
-//      await loadUser();
-    } else {
-      notification.error({
-        message: "Error create user",
-        description: JSON.stringify(res.message),
-      });
-    }
-  };
+//     const res = await createUserAPI(fullName, email, password, phone);
+//     if (res.data) {
+//       notification.success({
+//         message: "create user",
+//         description: "Tao user thanh cong",
+//       });
+//      resetAndCloseModal();
+// //      await loadUser();
+//     } else {
+//       notification.error({
+//         message: "Error create user",
+//         description: JSON.stringify(res.message),
+//       });
+//     }
+//   };
 
   const resetAndCloseModal = () => {
-    setIsModalOpen(false);
+    setIsModalUpdateOpen(false);
     setFullName("");
-    setEmail("");
-    setPassword("");
+    setId("");
     setPhone("");
+    setDataUpdate(null);
   };
 
 
         return (
                 <Modal
         title="Update A User"
-        open={isModalOpen}
-        onOk={() => handelSubmitBtn()}
+        open={isModalUpdateOpen}
+        // onOk={() => handleSubmitBtn()}
         onCancel={() => resetAndCloseModal()}
         maskClosable={false}
         okText={"Save"}
       >
         <div style={{ display: "flex", gap: "15px", flexDirection: "column" }}>
+            <div>
+            <span>Id</span>
+            <Input
+              value={id}
+             disabled
+            />
+          </div>
           <div>
             <span>Fullname</span>
             <Input
@@ -68,24 +85,7 @@ const UpdateUserModal = () => {
               }}
             />
           </div>
-          <div>
-            <span>Email</span>
-            <Input
-              value={email}
-              onChange={(event) => {
-                setEmail(event.target.value);
-              }}
-            />
-          </div>
-          <div>
-            <span>Password</span>
-            <Input.Password
-              value={password}
-              onChange={(event) => {
-                setPassword(event.target.value);
-              }}
-            />
-          </div>
+        
           <div>
             <span>Phone number</span>
             <Input
