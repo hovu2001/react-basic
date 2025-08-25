@@ -3,7 +3,7 @@ import { notification, Space, Table, Tag, Popconfirm } from "antd";
 import UpdateUserModal from "./update.user.modal";
 import { useState } from "react";
 import ViewUserDeTail from "./view.user.detail";
-import { deleteUser, deleteUserAPI } from "../../services/api.service";
+import { deleteUserAPI } from "../../services/api.service";
 const UserTable = (props) => {
   const { dataUsers , loadUser } = props;
 
