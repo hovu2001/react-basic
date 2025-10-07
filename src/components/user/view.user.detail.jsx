@@ -1,7 +1,15 @@
 import { Drawer } from "antd";
-
+import { useState } from "react";
 const ViewUserDeTail = (props) => {
   const { dataDetail, setDataDetail, isDetailOpen, setIsDetailOpen } = props;
+  const [imagePreview, setImagePreview] = useState(null);
+
+  const handleImageChange = (e) => {
+    const file = e.target.files && e.target.files[0];
+    if (file) {
+      setImagePreview(URL.createObjectURL(file));
+    }
+  };
 
   return (
     <Drawer
@@ -19,11 +27,19 @@ const ViewUserDeTail = (props) => {
           <p>Avatar: {dataDetail.avatar}</p>
           <br />
           <p>Avatar:</p>
-          <div>
+          <div
+            style={{
+              marginTop: "10px",
+              height: "100px",
+              width: "150px",
+              border: "1px solid #ccc",
+            }}
+          >
             <img
-              height={250}
-              width={250}
-              src={`http://localhost:8080/images/avatar/${dataDetail.avatar || "default.png"}`}
+              style={{ height: "100%", width: "100%", objectFit: "contain" }}
+              src={`http://localhost:8080/images/avatar/${
+                dataDetail.avatar || "default.png"
+              }`}
               alt="avatar"
             />
           </div>
@@ -42,7 +58,28 @@ const ViewUserDeTail = (props) => {
             >
               Upload Avatar
             </label>
-            <input type="file" hidden id="btnUpload" />
+            <input
+              type="file"
+              hidden
+              id="btnUpload"
+              onChange={handleImageChange}
+            />
+            {imagePreview && (
+               <div
+            style={{
+              marginTop: "10px",
+              height: "100px",
+              width: "150px",
+              border: "1px solid #ccc",
+            }}
+          >
+            <img
+              style={{ height: "100%", width: "100%", objectFit: "contain" }}
+              src={imagePreview}
+              alt="avatar"
+            />
+          </div>
+            )}
           </div>
         </>
       ) : (
